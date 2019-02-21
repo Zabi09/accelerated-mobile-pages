@@ -7953,3 +7953,4 @@ if ( ! function_exists('ampforwp_rank_math') ) {
 		do_action( 'rank_math/head' );
 	}
 }
+remove_action('amp_post_template_css','ampforwp_backtotop_global_css');
