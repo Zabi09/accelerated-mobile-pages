@@ -4516,7 +4516,7 @@ Redux::setSection( $opt_name, array(
                         
                     ),
                    'default'=> '1',
-                   'required' => array( array('amp-design-selector', '=' , '4') ),
+                   
             ),
            array(
                        'id' => 'header_section_2',
