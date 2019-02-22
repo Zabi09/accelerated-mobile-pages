@@ -814,7 +814,7 @@ function ampforwp_sanitize_color( $color ) {
     return 'rgba('.$red.','.$green.','.$blue.','.$alpha.')';
 }
 
-// Post Types
+// Post Types.
 function ampforwp_get_all_post_types(){
     global $redux_builder_amp;
     $post_types          = array();
