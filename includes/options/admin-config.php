@@ -4377,243 +4377,10 @@ Redux::setSection( $opt_name, array(
                        'layout_type' => 'accordion',
                         'accordion-open'=> 1,
             ),
-            // Swift
-            array(
-                    'id'        => 'swift-color-scheme',
-                    'title'     => esc_html__('Global Color Scheme', 'accelerated-mobile-pages'),
-                    'tooltip-subtitle'  => esc_html__('Choose the color for title, anchor link','accelerated-mobile-pages'),
-                    'type'      => 'color_rgba',
-                    'default'   => array(
-                    'color'      => '#005be2',
-                     ),
-                    'required' => array(
-                        array('amp-design-selector', '=' , '4')
-                     )
-            ),
-            array(
-                    'id'        => 'swift-hover-color-scheme',
-                    'title'     => esc_html__('Hover Color Scheme', 'accelerated-mobile-pages'),
-                    'tooltip-subtitle'  => esc_html__('Choose the color when hover for title, anchor links','accelerated-mobile-pages'),
-                    'type'      => 'color_rgba',
-                    'default'   => array(
-                    'color'      => '#005be2',
-                     ),
-                    'required' => array(
-                        array('amp-design-selector', '=' , '4')
-                     )
-            ),
-             array(
-                    'id'        => 'amp-opt-color-rgba-colorscheme',
-                    'type'      => 'color_rgba',
-                    'title'     => esc_html__('Color Scheme','accelerated-mobile-pages'),
-                    'default'   => array(
-                    'color'     => '#F42F42',
-                    ),
-                    'required' => array(
-                        array('amp-design-selector', '=' , '3')
-                     )
-              ),
-             array(
-                    'id'        => 'amp-opt-color-rgba-font',
-                    'type'      => 'color_rgba',
-                    'title'     => esc_html__('Color Scheme Font Color','accelerated-mobile-pages'),
-                    'default'   => array(
-                        'color'     => '#fff',
-                    ),
-                    'required' => array(
-                      array('amp-design-selector', '=' , '3')
-                    )
-              ), 
-              // Design 3  
-             array(
-                    'id'        => 'amp-opt-color-rgba-link',
-                    'type'      => 'color_rgba',
-                    'title'     => esc_html__('Anchor Link Color','accelerated-mobile-pages'),
-                    'default'   => array(
-                    'color'     => '#f42f42',
-                    ),
-                    'required' => array(
-                        array('amp-design-selector', '=' , '3')
-                    )
-              ), 
-             // Design 2
-             array(
-                    'id'        => 'amp-opt-color-rgba-link-design2',
-                    'type'      => 'color_rgba',
-                    'title'     => esc_html__('Anchor Link Color','accelerated-mobile-pages'),
-                    'default'   => array(
-                    'color'     => '#0a89c0',
-                    ),
-                    'required' => array(
-                        array('amp-design-selector', '=' , '2')
-                    )
-              ),
-              // Design 1 
-             array(
-                    'id'        => 'amp-opt-color-rgba-link-design1',
-                    'type'      => 'color_rgba',
-                    'title'     => esc_html__('Anchor Link Color','accelerated-mobile-pages'),
-                    'default'   => array(
-                    'color'     => '#0a89c0',
-                    ),
-                    'required' => array(
-                        array('amp-design-selector', '=' , '1')
-                    )
-              ), 
-             array(
-                    'id'        => 'amp-opt-color-rgba-colorscheme-call',
-                    'type'      => 'color_rgba',
-                    'title'     => esc_html__('Call Button Color','accelerated-mobile-pages'),
-                    'default'   => array(
-                    'color'     => '#0a89c0',
-                    ),
-                    'required' => array(
-                        array('ampforwp-callnow-button', '=' , '1')
-                    )
-             ),
-            
-               array(
-                           'id' => 'typography-section',
-                           'type' => 'section',
-                           'title' => esc_html__('Typography', 'accelerated-mobile-pages'),
-                           'indent' => true,
-                            /*'required' => array(
-                                array('amp-design-selector', '=' , '4')
-                            ),*/
-                            'layout_type' => 'accordion',
-                            'accordion-open'=> 1,
-                ));
-    if(ampforwp_levelup_compatibility('levelup_theme')){
-
-        $fonts_settings[] = array(
-                'id'       => 'ampforwp_page_levelup_manage_fonts',
-                'type'     => 'raw',
-                'desc' => 'Levelup theme using default fonts. <a href="'.admin_url( '/customize.php?autofocus[section]=theme_field_settings' ).'">Manage fonts</a>'
-            );
-       $amp_fontparts = array_merge($amp_fontparts ,$fonts_settings);    
-
-    }else{
-        $selectedOption = get_option('redux_builder_amp',true);
-        if(!isset($selectedOption['amp-design-selector'])){
-            $selectedOption['amp-design-selector'] = '4';
-        }
-        $googleSupportFontEnabled = array('1','2','3','4');
-        $googleSupportFontEnabled = apply_filters( 'amp_theme_font_support',  $googleSupportFontEnabled);
-        $enabledGoogleFonts = false;
-        if(in_array($selectedOption['amp-design-selector'], $googleSupportFontEnabled) ){
-            $enabledGoogleFonts = true;
-        }
-        $fonts_settings =  array(
-            array(
-                'id'        =>'google_font_api_key',
-                'type'      =>'text',
-                'title'     =>esc_html__('Google Font API key','accelerated-mobile-pages'),
-                'tooltip-subtitle'  => esc_html__('You can get the Link ','accelerated-mobile-pages').'<a target="_blank" href="https://developers.google.com/fonts/docs/developer_api?refresh=1&pli=1#APIKey">'.esc_html__('form here','accelerated-mobile-pages').'</a>',
-                'default'   =>'',
-                'required' => array(
-                    array('amp-design-selector', '=' , '4')
-                 )
-            ),
-            array(
-                'id'       => 'amp_font_selector',
-                'type'     => 'select',
-                'class'    => 'ampforwp-google-font-class ampwp-font-families',
-                'title'    => esc_html__( 'Global Font Family ', 'accelerated-mobile-pages' ),
-                'tooltip-subtitle' => esc_html__( 'Select your design from dropdown or ', 'accelerated-mobile-pages' ),
-                'options'  => array(
-                    '1' => 'None',
-                ),
-                'default'  => '',
-                'required' => array(
-                    array('amp-design-selector', '=' , '4')
-                )
-
-            ),
-            array(
-                'id'       => 'amp_font_type',
-                'type'     => 'select',
-                'class'    => 'ampforwp-google-font-class ampwp-font-family-weights',
-                'multi'    => true,
-                'title'    => esc_html__( 'Global Font Weight Selector', 'accelerated-mobile-pages' ),
-                'tooltip-subtitle' => esc_html__( 'Select your design from dropdown', 'accelerated-mobile-pages' ),
-                'options'  => array(
-                    '1' => 'none',
-                ),
-                'default'  => '',
-                'required' => array(
-                    array('amp-design-selector', '=' , '4')
-                )
-
-            ),
-            array(
-                'id'        =>'google_current_font_data',
-                'type'      =>'text',
-                'class'     => 'hide',
-                'title'     =>esc_html__('Google Font Current Font','accelerated-mobile-pages'),
-                'default'   =>'',
-                'required' => array(
-                    array('amp-design-selector', '=' , '4')
-                )
-            ),
-            array(
-                    'id'       => 'content-font-family-enable',
-                    'type'     => 'switch',
-                    'class'    => 'ampforwp-google-font-class',
-                    'title'    => esc_html__('Content Font Selector', 'accelerated-mobile-pages'),
-                    'required' => array(
-                                   // array('amp-design-selector', '=' , '4')
-                                    ),
-                    'default'  => '0' ,
-                    'required' => array(
-                        array('amp-design-selector', '=' , '4')
-                    )   
-            ),
-            array(
-                'id'       => 'amp_font_selector_content_single',
-                'type'     => 'select',
-                'class'    => 'ampforwp-google-font-class ampwp-font-families',
-                'title'    => esc_html__( 'Content Font Family Selector', 'accelerated-mobile-pages' ),
-                'tooltip-subtitle' => esc_html__( 'Select your design from dropdown or ', 'accelerated-mobile-pages' ),
-                'options'  => array(
-                    '1' => 'None',
-                ),
-                'default'  => '',
-                'required' => array(
-                    array('amp-design-selector', '=' , '4'),
-                    array('content-font-family-enable', '=' , '1'),
-                )
-
-            ),
-            array(
-                'id'       => 'amp_font_type_content_single',
-                'type'     => 'select',
-                'class'    => 'ampforwp-google-font-class ampwp-font-family-weights',
-                'multi'    => true,
-                'title'    => esc_html__( 'Content Font Family Weight Selector', 'accelerated-mobile-pages' ),
-                'tooltip-subtitle' => esc_html__( 'Select your design from dropdown', 'accelerated-mobile-pages' ),
-                'options'  => array(
-                    '1' => 'none',
-                ),
-                'default'  => '',
-                'required' => array(
-                    array('amp-design-selector', '=' , '4'),
-                    array('content-font-family-enable', '=' , '1')
-                )
-
-            ),
-            array(
-                'id'        =>'google_current_font_data_content_single',
-                'type'      =>'text',
-                'class'     => 'hide',
-                'title'     =>esc_html__('Google Font Current Font','accelerated-mobile-pages'),
-                'default'   =>'',
-                'required' => array(
-                    array('amp-design-selector', '=' , '4')
-                )
-            )
+ 
+           
         );
-            $amp_fontparts = array_merge($amp_fontparts ,$fonts_settings);   
-    }
+            
     $global_settings = array(
                 array(
                        'id' => 'general_sdbar',
@@ -4629,7 +4396,7 @@ Redux::setSection( $opt_name, array(
                         'type'  => 'switch',
                         'title' => esc_html__('Sidebar', 'accelerated-mobile-pages'),
                         'default'   => 0,
-                        'required' => array( array('amp-design-selector', '=' , '4') ),
+                       
                 ),
               array(
                         'id'    => 'gbl-sidebar',
@@ -4746,14 +4513,7 @@ Redux::setSection( $opt_name, array(
                                 'alt'=>' Header 1 ',
                                 'img' =>AMPFORWP_PLUGIN_DIR_URI.'/images/head-1.png'
                                 ),
-                        '2' => array(
-                                'alt'=>' Header 2 ',
-                                'img' =>AMPFORWP_PLUGIN_DIR_URI.'/images/head-2.png'
-                                ),
-                        '3' => array(
-                                'alt'=>' Header 3 ',
-                                'img' =>AMPFORWP_PLUGIN_DIR_URI.'/images/head-3.png',
-                                ),
+                        
                     ),
                    'default'=> '1',
                    'required' => array( array('amp-design-selector', '=' , '4') ),
@@ -5665,7 +5425,7 @@ $single_page_options = array(
                         
                     ),
                    'default'=> '1',
-                   'required' => array( array('amp-design-selector', '=' , '4') ),
+                   
             ),
             
             array(
@@ -6169,9 +5929,7 @@ $single_page_options = array(
                         
                     ),
                    'default'=> '1',
-                   'required' => array( array('amp-design-selector', '=' , '4'),
-                                 
-                                ),
+        
             ),
             array(
                'id' => 'ampforwp-gallery-lightbox', 
@@ -6269,14 +6027,7 @@ else{
         'id'         => 'amp-theme-footer-settings',
         'subsection' => true,
         'fields'     => array(
-            array(
-                   'id' => 'footer-tab-1',
-                   'type' => 'section',
-                   'title' => esc_html__('Footer Design', 'accelerated-mobile-pages'),
-                   'indent' => true,
-                   'layout_type' => 'accordion',
-                    'accordion-open'=> 1,
-             ),
+            
                 // Swift
                   array(
                     'id'    => 'footer-type',
@@ -6305,7 +6056,7 @@ else{
                         'type'  => 'switch',
                         'title' => esc_html__('Menu', 'accelerated-mobile-pages'),
                         'default'   => 1,
-                        'required' => array( array('amp-design-selector', '=' , '4') ),
+                        
                         'tooltip-subtitle'       => esc_html__( 'Add Menus to your AMP pages by clicking on this <a href="'.trailingslashit(get_admin_url()).'nav-menus.php?action=locations">link</a>' , 'accelerated-mobile-pages'),
                 ),
                 array(
@@ -6341,182 +6092,7 @@ else{
                         'title'    => esc_html__('Make "View Non-AMP" link nofollow', 'accelerated-mobile-pages'),
                         'default'   => 0
                 ),
-            array(
-                   'id' => 'footer-tab-2',
-                   'type' => 'section',
-                   'title' => esc_html__('Advanced Footer Options', 'accelerated-mobile-pages'),
-                   'indent' => true,
-                   'required' => array(
-                            array('amp-design-selector', '=' , '4')
-                    ),
-                   'layout_type' => 'accordion',
-                    'accordion-open'=> 0,
-             ),
-            array(
-                    'id'    => 'footer-customize-options',
-                    'type'  => 'switch',
-                    'title' => esc_html__('Advanced Footer Design', 'accelerated-mobile-pages'),
-                    'default'   => 0,
-                    'required' => array( array('amp-design-selector', '=' , '4') ),
-            ),
-            array(
-                    'id'        => 'swift-footer-txt-clr',
-                    'title'     => esc_html__('Footer Text Color', 'accelerated-mobile-pages'),
-                    'type'      => 'color_rgba',
-                    'default'   => array(
-                        'color'  => '#888888',
-                         ),
-                    'required' => array(
-                        array('footer-customize-options','=',1)
-                      )
-              ),
-            array(
-                    'id'        => 'swift-footer-link-clr',
-                    'title'     => esc_html__('Footer Link Color', 'accelerated-mobile-pages'),
-                    'type'      => 'color_rgba',
-                    'default'   => array(
-                        'color'  => '#fcc118',
-                         ),
-                    'required' => array(
-                        array('footer-customize-options','=',1)
-                      )
-              ),
-            array(
-                    'id'        => 'swift-footer-link-hvr',
-                    'title'     => esc_html__('Footer Link Hover Color', 'accelerated-mobile-pages'),
-                    'type'      => 'color_rgba',
-                    'default'   => array(
-                        'color'  => '#888888',
-                         ),
-                    'required' => array(
-                        array('footer-customize-options','=',1)
-                      )
-              ),
-            array(
-                    'id'        => 'swift-footer-bg',
-                    'title'     => esc_html__('Footer 1 Background', 'accelerated-mobile-pages'),
-                    'type'      => 'color_rgba',
-                    'default'   => array(
-                        'color'  => '#182733',
-                         ),
-                    'required' => array(
-                        array('footer-customize-options','=',1)
-                      )
-              ),
-            array(
-                    'id'        =>"ftr1-gapping",
-                    'type'      =>'spacing',
-                    'title'     => esc_html__('Footer 1 Gapping', 'accelerated-mobile-pages'),
-                    'units'          => array('px','%'),
-                    'default'   =>array(
-                                        'padding-top'     => '70px', 
-                                        'padding-right'   => '0px', 
-                                        'padding-bottom'  => '70px', 
-                                        'padding-left'    => '0px',
-                                        'units'          => 'px', 
-                                    ),
-                    'required' => array(
-                        array('footer-customize-options','=',1)
-                      )
-             ),
-            array(
-                    'id'       => 'swift-footer1-cntnsize',
-                    'type'     => 'text',
-                    'title'    => esc_html__('Footer 1 Font Size', 'accelerated-mobile-pages'),
-                    'default'  => '14px',
-                    'required' => array(
-                        array('footer-customize-options','=',1)
-                      )
-              ),
-            array(
-                    'id'       => 'swift-head-size',
-                    'type'     => 'text',
-                    'title'    => esc_html__('Footer 1 Heading Font Size', 'accelerated-mobile-pages'),
-                    'default'  => '12px',
-                    'required' => array(
-                        array('footer-customize-options','=',1)
-                      )
-            ),
-            array(
-                    'id'       => 'swift-head-fntwgth',
-                    'type'     => 'text',
-                    'title'    => esc_html__('Footer 1 Heading Font Weight', 'accelerated-mobile-pages'),
-                    'default'  => '500',
-                    'required' => array(
-                        array('footer-customize-options','=',1)
-                      )
-            ),
-            array(
-                    'id'        => 'swift-footer-heading-clr',
-                    'title'     => esc_html__('Footer 1 Heading Color', 'accelerated-mobile-pages'),
-                    'type'      => 'color_rgba',
-                    'default'   => array(
-                        'color'  => '#999',
-                         ),
-                    'required' => array(
-                        array('footer-customize-options','=',1)
-                      )
-              ),
-            array(
-                    'id'        => 'swift-footer2-bg',
-                    'title'     => esc_html__('Footer 2 Background', 'accelerated-mobile-pages'),
-                    'type'      => 'color_rgba',
-                    'default'   => array(
-                        'color'  => '#2e2b2e',
-                         ),
-                    'required' => array(
-                        array('footer-customize-options','=',1)
-                      )
-              ),
-            array(
-                    'id'        =>"ftr2-gapping",
-                    'type'      =>'spacing',
-                    'title'     => esc_html__('Footer 2 Gapping', 'accelerated-mobile-pages'),
-                    'units'          => array('px','%'),
-                    'default'   =>array(
-                                        'padding-top'     => '50px', 
-                                        'padding-right'   => '0px', 
-                                        'padding-bottom'  => '50px', 
-                                        'padding-left'    => '0px',
-                                        'units'          => 'px', 
-                                    ),
-                    'required' => array(
-                        array('footer-customize-options','=',1)
-                      )
-             ),
-            array(
-                    'id'       => 'swift-footer2-fntsize',
-                    'type'     => 'text',
-                    'title'    => esc_html__('Footer 2 Font Size', 'accelerated-mobile-pages'),
-                    'default'  => '12px',
-                    'required' => array(
-                        array('footer-customize-options','=',1)
-                      )
-            ),
-            array(
-                    'id'        => 'swift-footer-brdrclr',
-                    'title'     => esc_html__('Footer 2 Border Color', 'accelerated-mobile-pages'),
-                    'type'      => 'color_rgba',
-                    'default'   => array(
-                        'color'  => '#eee',
-                         ),
-                    'required' => array(
-                        array('footer-customize-options','=',1)
-                      )
-              ),
-            array(
-                    'id'    => 'footer2-position-type',
-                   'title'  => esc_html__('Footer 2 Menu Position', 'accelerated-mobile-pages'),
-                   'type'   => 'select',
-                   'options'=> array(
-                        '1' =>  'Center',
-                        '2' =>  'Inline'
-                    ),
-                   'default'=> '1',
-                  'required' => array(
-                      array('footer-customize-options','=',1)
-                    )    
-            ),
+          
 
         )
     ));
@@ -6543,7 +6119,7 @@ else{
                   'default'  =>  '0',
                   'title'    => esc_html__('Featured Image', 'accelerated-mobile-pages'),
                   'tooltip-subtitle' => esc_html__('Enable Featured Image on Pages.'),
-                  'required' => array('amp-design-selector','=','4'),
+                  
             ),
             array(
                       'id'       => 'meta_page',
@@ -6601,7 +6177,7 @@ else{
                                 'below-content' => 'Below Content'
                                 ),
                 'default'  => 'default',
-                'required' => array(array('amp-design-selector', '=', '4') )
+                
             ), 
         // Social Share links to AMP
           array(
@@ -6993,12 +6569,10 @@ else{
           array(
        'id' => 'social-media-profiles-subsection',
        'type' => 'section',
-       'title' => esc_html__('Social Media Profiles (Design #3)', 'accelerated-mobile-pages'),
+       'title' => esc_html__('Social Media Profiles', 'accelerated-mobile-pages'),
        'tooltip-subtitle' => esc_html__('Please enter your personal/organizational social media profiles here', 'accelerated-mobile-pages'),
        'indent' => true,
-       'required' => array(
-                array('amp-design-selector', '=' , '3')
-        ),
+       
        'layout_type' => 'accordion',
         'accordion-open'=> 1,
      ),
@@ -7008,9 +6582,7 @@ else{
               'type'      =>  'switch',
               'title'     =>  esc_html__('Twitter ', 'accelerated-mobile-pages'),
               'default'   =>  1,
-              'required' => array(
-                array('amp-design-selector', '=' , '3')
-              ),
+             
           ),
           array(
               'id'        =>  'enable-single-twittter-profile-url',
@@ -7018,7 +6590,7 @@ else{
               'title'     =>  esc_html__('Twitter URL', 'accelerated-mobile-pages'),
               'default'   =>  '#',
               'required' => array(
-                array('amp-design-selector', '=' , '3'),
+                
                 array('enable-single-twittter-profile', '=' , '1')
               ),
           ),
@@ -7028,9 +6600,7 @@ else{
               'type'      =>  'switch',
               'title'     =>  esc_html__('Facebook ', 'accelerated-mobile-pages'),
               'default'   =>  1,
-              'required' => array(
-                array('amp-design-selector', '=' , '3')
-              ),
+              
           ),
           array(
               'id'        =>  'enable-single-facebook-profile-url',
@@ -7038,7 +6608,7 @@ else{
               'title'     =>  esc_html__('Facebook URL', 'accelerated-mobile-pages'),
               'default'   =>  '#',
               'required' => array(
-                array('amp-design-selector', '=' , '3'),
+                
                 array('enable-single-facebook-profile', '=' , '1')
               ),
           ),
@@ -7048,9 +6618,7 @@ else{
               'type'      =>  'switch',
               'title'     =>  esc_html__('Pintrest ', 'accelerated-mobile-pages'),
               'default'   =>  1,
-              'required' => array(
-                array('amp-design-selector', '=' , '3')
-              ),
+              
           ),
           array(
               'id'        =>  'enable-single-pintrest-profile-url',
@@ -7058,7 +6626,7 @@ else{
               'title'     =>  esc_html__('Pintrest URL', 'accelerated-mobile-pages'),
               'default'   =>  '#',
               'required' => array(
-                array('amp-design-selector', '=' , '3'),
+                
                 array('enable-single-pintrest-profile', '=' , '1')
               ),
           ),
@@ -7068,9 +6636,7 @@ else{
               'type'      =>  'switch',
               'title'     =>  esc_html__('Google Plus ', 'accelerated-mobile-pages'),
               'default'   =>  0,
-              'required' => array(
-                array('amp-design-selector', '=' , '3')
-              ),
+              
           ),
           array(
               'id'        =>  'enable-single-google-plus-profile-url',
@@ -7078,7 +6644,7 @@ else{
               'title'     =>  esc_html__('Google Plus URL', 'accelerated-mobile-pages'),
               'default'   =>  '',
               'required' => array(
-                array('amp-design-selector', '=' , '3'),
+                
                 array('enable-single-google-plus-profile', '=' , '1')
               ),
           ),
@@ -7088,9 +6654,7 @@ else{
               'type'      =>  'switch',
               'title'     =>  esc_html__('LinkedIn', 'accelerated-mobile-pages'),
               'default'   =>  0,
-              'required' => array(
-                array('amp-design-selector', '=' , '3')
-              ),
+              
           ),
           array(
               'id'        =>  'enable-single-linkdin-profile-url',
@@ -7098,7 +6662,7 @@ else{
               'title'     =>  esc_html__('LinkedIn URL', 'accelerated-mobile-pages'),
               'default'   =>  '',
               'required' => array(
-                array('amp-design-selector', '=' , '3'),
+                
                 array('enable-single-linkdin-profile', '=' , '1')
               ),
           ),
@@ -7108,9 +6672,7 @@ else{
               'type'      =>  'switch',
               'title'     =>  esc_html__('Youtube ', 'accelerated-mobile-pages'),
               'default'   =>  1,
-              'required' => array(
-                array('amp-design-selector', '=' , '3')
-              ),
+              
           ),
           array(
               'id'        =>  'enable-single-youtube-profile-url',
@@ -7118,7 +6680,7 @@ else{
               'default'   =>  '#',
               'title'     =>  esc_html__('Youtube URL', 'accelerated-mobile-pages'),
               'required' => array(
-                array('amp-design-selector', '=' , '3'),
+               
                 array('enable-single-youtube-profile', '=' , '1')
               ),
           ),
@@ -7128,9 +6690,7 @@ else{
               'type'      =>  'switch',
               'title'     =>  esc_html__('Instagram ', 'accelerated-mobile-pages'),
               'default'   =>  0,
-              'required' => array(
-                array('amp-design-selector', '=' , '3')
-              ),
+              
           ),
           array(
               'id'        =>  'enable-single-instagram-profile-url',
@@ -7138,7 +6698,7 @@ else{
               'default'   =>  '',
               'title'     =>  esc_html__('Instagram URL', 'accelerated-mobile-pages'),
               'required' => array(
-                array('amp-design-selector', '=' , '3'),
+                
                 array('enable-single-instagram-profile', '=' , '1')
               ),
           ),
@@ -7148,9 +6708,7 @@ else{
               'type'      =>  'switch',
               'title'     =>  esc_html__('VKontakte ', 'accelerated-mobile-pages'),
               'default'   =>  0,
-              'required' => array(
-                array('amp-design-selector', '=' , '3')
-              ),
+              
           ),
           array(
               'id'        =>  'enable-single-VKontakte-profile-url',
@@ -7158,7 +6716,7 @@ else{
               'default'   =>  '',
               'title'     =>  esc_html__('VKontakte URL', 'accelerated-mobile-pages'),
               'required' => array(
-                array('amp-design-selector', '=' , '3'),
+               
                 array('enable-single-VKontakte-profile', '=' , '1')
               ),
           ),
@@ -7170,9 +6728,7 @@ else{
               'type'      =>  'switch',
               'title'     =>  esc_html__('Reddit', 'accelerated-mobile-pages'),
               'default'   =>  0,
-              'required' => array(
-                array('amp-design-selector', '=' , '3')
-              ),
+              
           ),
           array(
               'id'        =>  'enable-single-reddit-profile-url',
@@ -7180,7 +6736,7 @@ else{
               'title'     =>  esc_html__('Reddit URL', 'accelerated-mobile-pages'),
               'default'   =>  '',
               'required' => array(
-                array('amp-design-selector', '=' , '3'),
+               
                 array('enable-single-reddit-profile', '=' , '1')
               ),
           ),
@@ -7190,9 +6746,7 @@ else{
               'type'      =>  'switch',
               'title'     =>  esc_html__('Snapchat ', 'accelerated-mobile-pages'),
               'default'   =>  0,
-              'required' => array(
-                array('amp-design-selector', '=' , '3')
-              ),
+              
           ),
           array(
               'id'        =>  'enable-single-snapchat-profile-url',
@@ -7200,7 +6754,7 @@ else{
               'title'     =>  esc_html__('Snapchat URL', 'accelerated-mobile-pages'),
               'default'   =>  '',
               'required' => array(
-                array('amp-design-selector', '=' , '3'),
+               
                 array('enable-single-snapchat-profile', '=' , '1')
               ),
           ),
@@ -7210,9 +6764,7 @@ else{
               'type'      =>  'switch',
               'title'     =>  esc_html__('Tumblr', 'accelerated-mobile-pages'),
               'default'   =>  0,
-              'required' => array(
-                array('amp-design-selector', '=' , '3')
-              ),
+              
           ),
           array(
               'id'        =>  'enable-single-Tumblr-profile-url',
@@ -7220,7 +6772,7 @@ else{
               'title'     =>  esc_html__('Tumblr URL', 'accelerated-mobile-pages'),
               'default'   =>  '',
               'required' => array(
-                array('amp-design-selector', '=' , '3'),
+               
                 array('enable-single-Tumblr-profile', '=' , '1')
               ),
           ),
